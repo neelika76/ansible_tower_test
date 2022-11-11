@@ -1,18 +1,18 @@
 ---
-- name: Configuring Apache
+- name: Configuring Web Server
   hosts: all
   tasks:
-  - name: Install the package
+  - name: Installing the package
     yum:
      name: httpd
      state: present
-
-  - name: creating index file
-    template:
-     src: mycode.j2
+  - name: Creating The Content
+    copy:
+     content: "Hello From Ansible Tower"
      dest: /var/www/html/index.html
 
-  - name: starting the service
+  - name: Starting the Service
     service:
      name: httpd
      state: started
+     enabled: true
